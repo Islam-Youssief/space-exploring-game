@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" href="assets/images/fav.png">
+        <title> Rocks Moves</title>
+        <link rel="stylesheet" href="assets/css/RocksPart.css">
+        <link rel="stylesheet" href="assets/css/design-start-game.css">
+    </head>
+    <body>
+        <div id="choose">
+            
+            <h1 style="padding-left: 40%;color: white">Choose A Space Ship</h1>
+            <center style="padding-top: 3%">
+
+            
+            <label style="color: white">username</label>
+
+            <input id="username" type="text" name="" placeholder="" value=""><br>
+            <br>  
+            
+            
+            <br> <input id="img1" type="radio" name="ship" value="assets/images/space/1.png" >
+
+
+            <label for="img1">
+                <img src="assets/images/space/1.png" style="width:18%;" id="first"> 
+            </label>
+
+            <input id="img2" style="padding-left: 10%" type="radio" name="ship" value="assets/images/space/3.png">
+            <label for="img2">
+                <img src="assets/images/space/3.png" style="width:18%;" id="second">
+            </label>
+
+            </center>
+
+            <img id="left-image" src="assets/images/bg/11.png" style="clear: both;">
+            
+            <div class ="button-right">
+                <a > <button class="button" id="start" >Click <br> When<br>You<br>READY </button></a>
+            </div>
+
+        </div>
+
+
+        <div id="main_game">    
+            <div class="topbar">
+            <button class=" btn-success btn-lg" > START !! </button>
+            <button class=" btn-info btn-lg" > score 0 </button>
+            <!-- <button class=" btn-danger btn-lg" > collision 0 </button> -->
+            <button class=" btn-live btn-lg" > lives </button>
+            <a href="RocksPart.html"> <button class=" btn-live btn-lg" > Start Over </button> </a>
+            <a href="index.html"> <button class=" btn-live btn-lg" > Home Page </button> </a>
+
+
+            <div  class="progressbar">
+                <div id="progress">
+                    <ul>
+                        <li class="stage "><div class="div1"></div><p >Level 1</p></li>
+                        <li class="stage "><div class="div1"></div><p >Level 2</p></li>
+                        <li class="stage"><div class="div1"></div><p >Level 3</p></li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+            <div class="main">
+                <div class="badge"> 
+                    <img id="badge1" src="assets/images/badge/badge1.png">
+                    <img id="badge2" src="assets/images/badge/badge2.png">    
+                    <img id="badge3" src="assets/images/badge/badge3.png">    
+                </div>
+                <div id="container" class="container">
+                    <!-- <div id="rocket"> <img src="mothership.png"></div> -->
+                    
+                </div>
+            </div>
+            <audio id="explosion" controls >
+                <source  src="assets/Audio/Explosion6.mp3" type="audio/mpeg">
+            </audio>
+            <audio id="shipfire" controls >
+                <source  src="assets/Audio/ship_laser.wav" type="audio/mpeg">
+            </audio>
+        </div>
+    <script src="assets/js/rocks with oop.js"></script>
+    </body>
+
+</html>
