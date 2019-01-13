@@ -1,0 +1,29 @@
+ body {
+  
+  margin: 0;
+  height: 580px;
+  background-repeat: no-repeat;  
+}
+
+div{
+				margin-top: 10%;
+}
+
+ul{
+  list-style-type:none;
+  text-align: justify;
+
+}
+
+#title{
+  color: #91ede2;
+  text-align: center;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.name{
+  color: white;
+  text-align: center;
+  font-size: 35px;
+} 
