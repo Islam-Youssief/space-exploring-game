@@ -2,7 +2,11 @@
   
   margin: 0;
   height: 580px;
-  background-repeat: no-repeat;  
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  
 }
 
 div{
@@ -20,10 +24,12 @@ ul{
   text-align: center;
   font-weight: bold;
   font-size: 50px;
+  font-family: 'Calligraffitti', cursive;
 }
 
 .name{
   color: white;
   text-align: center;
   font-size: 35px;
+  font-family: 'Charm', cursive;
 } 
