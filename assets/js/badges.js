@@ -6,6 +6,8 @@ splitted=[];
 num = [];
 names = [];
 var ls = window.localStorage;
+
+// Used to add dummy data to the local storage
 function setDummy(name , score)
 {
     for(var key in ls)
@@ -19,14 +21,17 @@ function setDummy(name , score)
             ls.setItem(name , score);
     }       
 }
+
+// Used to get the top player by sorting scores.
 function getScore()
 {   
     for(var key in ls)
     {
-        if (key ==='length')
-            break
-        else
-            res.push(key+':'+ls[key])
+        if ( key == 'lenght' || key == 'key' ||key == 'getitem' ||
+            key == 'setitem' || key == 'removeitem' || key == 'clear')
+            break;
+        else    
+            res.push(key +':' +ls[key]);  
     }    
     for (var i=0;i<res.length;i++)
     {
@@ -54,29 +59,14 @@ function getScore()
             }
         }
     }   
-//     if(x===0)
-//     { 
-//         if(num.length > 10)
-//                 num.length=10;
-//         for(var j=0;j<num.length;j++)
-//         {
-//             console.log(names[j]+ " : " + num[j]);
-//         }
-//     }
-//     else
-//     {
-        output = {[names[0]] : num[0]};
-        return output;
-//     }
+    output = {[names[0]] : num[0]};
+    return output;
 }
-
-
 
 var msg=document.getElementById('message');
 var myPic =document.getElementsByClassName('image');
 
-
-
+// showing badges according to the score
 function show(score){
       var i=0;
       msg.innerHTML="Your Badges Are:";
@@ -106,3 +96,15 @@ var playerName = Object.keys(output)[0];
 var score = Object.values(output)[0];
 var name=document.getElementById('caption').innerHTML=playerName;
 show(score);
+/*
+// Test cases :
+show(200);
+show(500);
+show(1000);
+show(1500);
+show(200);
+show(2000);
+show(2500);
+show(0);
+show(-5);
+*/
