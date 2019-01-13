@@ -1,0 +1,27 @@
+table{
+    margin-top: 120px;
+    margin-left: 410px;
+    margin-right: 150px;
+    border-color: white;
+}
+.image{
+  width:200px;
+  height:200px;
+  visibility:hidden;
+}
+
+#message{
+  border-spacing: 20px;
+  font-size: 35px;
+  text-align: center;
+  color:white;
+}
+
+
+caption{
+  width:100%;
+  font-size: 50px;
+  color:white;
+  margin-bottom: 30px;
+
+}
