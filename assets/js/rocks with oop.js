@@ -1,74 +1,62 @@
+/*
+There are 2 divs :
+one for choosing the space ship and entering user name
+The second one is to get the div of the game itself
+*/
 const divchoose = document.getElementById('choose');
 const divgame = document.getElementById('main_game');
-
-
-// rocks movements and collisions
-
-//==============================
+//==============================================================
 // global variables for the game
 let userRocket = null; 
-
 var level = 1 ;
 var RocksNumber = 0;
 var rocksMaximum = level * 8;
-
 var lives = 5 ;
-
 var score = 0 ;
+// Represents the stored score in local storage
 var totalScore = 0;
-
 let currentPlayer;
 let rocketimageURL;
-
-let angle = 0;  //for the ship rotation
-
+// for the ship rotation
+let angle = 0;
 // shootFire position
 let posleft=0;
 let postop=0;
-
-//========= general sounds & photo
+//==========  general sounds & photo  =================
 const explosionAudio = document.getElementById('explosion');
 const fireAudio = document.getElementById('shipfire');
 let fireImageURL = "./assets/images/fire/bullet.png"
-
-//==================================
-//DOM elements from html
+//=========== DOM elements from html  =================
 const container = document.getElementById('container');  //main game container
-const Levels = document.querySelectorAll('.stage'); //level completed 3
+const Levels = document.querySelectorAll('.stage');     //level completed 3
 const levelScore = document.querySelectorAll('.div1'); //level score 3
-
-
 const butscore = document.getElementsByClassName('btn-lg')[1];
 const butlives = document.getElementsByClassName('btn-lg')[2];
 const butstartOver1 = document.getElementsByClassName('btn-lg')[3];
 const butstartOver2 = document.getElementsByClassName('btn-lg')[4];
-
 butstartOver1.style.display ='none';
 butstartOver2.style.display ='none';
-
 const badgeBo = document.querySelector('.badge');
 const badge1 = document.getElementById('badge1');
 const badge2 = document.getElementById('badge2');
 const badge3 = document.getElementById('badge3');
-
 const but = document.getElementsByClassName('btn-lg')[0];
-
 const butchoose = document.getElementById("start");
 
-butchoose.addEventListener("click", function(e) {
-
+// pressing on the ready button
+butchoose.addEventListener("click", function(e) 
+{
     currentPlayer = document.getElementById("username").value;
-    if(document.getElementById("img1").checked){
+    if(document.getElementById("img1").checked)
         rocketimageURL = document.getElementById("img1").value;
-    }
-    else{
+    else
         rocketimageURL = document.getElementById("img2").value;
-    }
+
     divchoose.style.display="none";
     divgame.style.display="block";
 });
-//================= set items in local storage =======
 
+//================= set items in local storage =======
 function updateStorage () {
     localStorage.setItem(`${currentPlayer}`,totalScore);
 }
@@ -77,17 +65,16 @@ function updateStorage () {
 butlives.innerHTML=`Lives ${lives}`;
 butscore.innerHTML = `Score ${score}` ;
 
-
-
 //=======levels & score progress=========
-
 function moveToLevel (levelNum) {
     level_Score = levelScore [levelNum - 1];
-    if (levelNum === 2) { 
+    if (levelNum === 2)
+    { 
         Levels[0].classList.add('completed');
         levelScore[0].style.width ='100%';
     }   
-    if (levelNum === 3 ) {
+    if (levelNum === 3 ) 
+    {
         Levels[1].classList.add('completed');
         levelScore[1].style.width ='100%';
     }
@@ -124,6 +111,7 @@ class FireShape {
         container.appendChild(this.fireShape);   
     }
 }
+
 //Rock class to generate 'rocks in div' with random position and random number for movement 
 
 class Rock { 
@@ -137,101 +125,90 @@ class Rock {
         this.div.dataset.rocknum = num;
         this.num = num ;
     } 
+// Rocks movement
     move () {
 
         let moveClass;
         switch (this.num) {
             case 0 :
-                // this.div.style.backgroundColor = 'blue';
-                this.div.innerHTML = "<img src ='assets/images/plantes/2.png'>";
-                moveClass = setInterval (()=> {
-                    this.div.style.left =`${this.pos[1] ++ % 95}%`;
-                    this.div.style.top =`${this.pos[0] ++ % 95}%`;
-                },200)
-            break;
+                    this.div.innerHTML = "<img src ='assets/images/plantes/2.png'>";
+                    moveClass = setInterval (()=> {
+                        this.div.style.left =`${this.pos[1] ++ % 95}%`;
+                        this.div.style.top =`${this.pos[0] ++ % 95}%`;
+                    },200)
+                    break;
             case 1 :
-                // this.div.style.backgroundColor = 'blue';
-                this.div.innerHTML = "<img src ='assets/images/plantes/1.png'>";
-                moveClass = setInterval (()=> {
-                    this.div.style.left =`${(this.pos[1] -- === 0)? this.pos[1]= 95 : this.pos[1]  % 95}%`;
-                    this.div.style.top =`${(this.pos[0] -- === 0)? this.pos[0]= 95 : this.pos[0]  % 95}%`;
-                },300)
-            break;
+                    this.div.innerHTML = "<img src ='assets/images/plantes/1.png'>";
+                    moveClass = setInterval (()=> {
+                        this.div.style.left =`${(this.pos[1] -- === 0)? this.pos[1]= 95 : this.pos[1]  % 95}%`;
+                        this.div.style.top =`${(this.pos[0] -- === 0)? this.pos[0]= 95 : this.pos[0]  % 95}%`;
+                    },300)
+                    break;
             case 2 :
-                // this.div.style.backgroundColor = 'blue';
-                this.div.innerHTML = "<img src ='assets/images/plantes/asteroid_blend.png'>";
-                moveClass = setInterval (()=> {
-                    this.div.style.left =`${this.pos[1] ++ % 95}%`;
-                    this.div.style.top =`${this.pos[0] ++ % 95}%`;
-                },500)
-            break;
+                    this.div.innerHTML = "<img src ='assets/images/plantes/asteroid_blend.png'>";
+                    moveClass = setInterval (()=> {
+                        this.div.style.left =`${this.pos[1] ++ % 95}%`;
+                        this.div.style.top =`${this.pos[0] ++ % 95}%`;
+                    },500)
+                    break;
 
             case 3 :
-                // this.div.style.backgroundColor='black';
-                this.div.innerHTML = "<img src ='assets/images/plantes/3.png'>";
-                moveClass = setInterval (()=> {
-                    this.div.style.left =`${this.pos[1] ++ % 95}%`;
-                    this.div.style.top =`${(this.pos[0] +=.1) % 95}%`;
-                },200)
-            break;
+                    this.div.innerHTML = "<img src ='assets/images/plantes/3.png'>";
+                    moveClass = setInterval (()=> {
+                        this.div.style.left =`${this.pos[1] ++ % 95}%`;
+                        this.div.style.top =`${(this.pos[0] +=.1) % 95}%`;
+                    },200)
+                    break;
             case 4 :
-                // this.div.style.backgroundColor='black';
-                this.div.innerHTML = "<img src ='assets/images/plantes/4.png'>";
-                moveClass = setInterval (()=> {
-                    this.div.style.left = `${(this.pos[1] -- === 0)? this.pos[1]= 95 : this.pos[1]  % 95}%`;
-                    this.div.style.top =`${(this.pos[0] +=.2) % 95}%`;
-                },200)
-            break;
+                    this.div.innerHTML = "<img src ='assets/images/plantes/4.png'>";
+                    moveClass = setInterval (()=> {
+                        this.div.style.left = `${(this.pos[1] -- === 0)? this.pos[1]= 95 : this.pos[1]  % 95}%`;
+                        this.div.style.top =`${(this.pos[0] +=.2) % 95}%`;
+                    },200)
+                    break;
             case 5 :
-                // this.div.style.backgroundColor='white';
-                this.div.innerHTML = "<img src ='assets/images/plantes/5.png'>";
-                moveClass = setInterval (()=> {
-                    this.div.style.top =`${this.pos[0] ++ % 95}%`;
-                    this.div.style.left =`${(this.pos[1] +=.2) % 95}%`;
-                },200)
-            break;
+                    this.div.innerHTML = "<img src ='assets/images/plantes/5.png'>";
+                    moveClass = setInterval (()=> {
+                        this.div.style.top =`${this.pos[0] ++ % 95}%`;
+                        this.div.style.left =`${(this.pos[1] +=.2) % 95}%`;
+                    },200)
+                    break;
             case 6 :
-                // this.div.style.backgroundColor='white';
-                this.div.innerHTML = "<img src ='assets/images/plantes/6.png'>";
-                moveClass = setInterval (()=> {
-                    this.div.style.top =`${(this.pos[0] -- === 0)? this.pos[0]= 95 : this.pos[0]  % 95}%`;
-                    this.div.style.left =`${(this.pos[1] +=.2) % 95}%`;
-                },200)
-            break;
+                    this.div.innerHTML = "<img src ='assets/images/plantes/6.png'>";
+                    moveClass = setInterval (()=> {
+                        this.div.style.top =`${(this.pos[0] -- === 0)? this.pos[0]= 95 : this.pos[0]  % 95}%`;
+                        this.div.style.left =`${(this.pos[1] +=.2) % 95}%`;
+                    },200)
+                    break;
             case 7 :
-                // this.div.style.backgroundColor='white';
-                this.div.innerHTML = "<img src ='assets/images/plantes/7.png'>";
-                moveClass = setInterval (()=> {
-                    this.div.style.top =`${this.pos[0] ++ % 95}%`;
-                    this.div.style.left =`${(this.pos[1] +=.5) % 95}%`;
-                },200)
-            break;
+                    this.div.innerHTML = "<img src ='assets/images/plantes/7.png'>";
+                    moveClass = setInterval (()=> {
+                        this.div.style.top =`${this.pos[0] ++ % 95}%`;
+                        this.div.style.left =`${(this.pos[1] +=.5) % 95}%`;
+                    },200)
+                    break;
             case 8 :
-                // this.div.style.backgroundColor='white';
-                this.div.innerHTML = "<img src ='assets/images/plantes/8.png'>";
-                moveClass = setInterval (()=> {
-                    this.div.style.top =`${(this.pos[0] +=2) % 95}%`;
-                    this.div.style.left =`${this.pos[1] ++ % 95}%`;
-                },100)
-            break;
+                    this.div.innerHTML = "<img src ='assets/images/plantes/8.png'>";
+                    moveClass = setInterval (()=> {
+                        this.div.style.top =`${(this.pos[0] +=2) % 95}%`;
+                        this.div.style.left =`${this.pos[1] ++ % 95}%`;
+                    },100)
+                    break;
             case 9 :
-                // this.div.style.backgroundColor='white';
-                this.div.innerHTML = "<img src ='assets/images/plantes/9.png'>";
-                moveClass = setInterval (()=> {
-                    this.div.style.top =`${(this.pos[0] +=.5) % 95}%`;
-                    this.div.style.left =`${this.pos[1] ++ % 95}%`;
-                },100)
-            break;
+                    this.div.innerHTML = "<img src ='assets/images/plantes/9.png'>";
+                    moveClass = setInterval (()=> {
+                        this.div.style.top =`${(this.pos[0] +=.5) % 95}%`;
+                        this.div.style.left =`${this.pos[1] ++ % 95}%`;
+                    },100)
+                    break;
             case 10 :
-                // this.div.style.backgroundColor='white';
-                this.div.innerHTML = "<img src ='assets/images/plantes/10.png'>";
-                moveClass = setInterval (()=> {
-                    this.div.style.top =`${this.pos[0] ++ % 95}%`;
-                    this.div.style.left =`${(this.pos[1] +=2) % 95}%`;
-                },100)
-            break;
+                    this.div.innerHTML = "<img src ='assets/images/plantes/10.png'>";
+                    moveClass = setInterval (()=> {
+                        this.div.style.top =`${this.pos[0] ++ % 95}%`;
+                        this.div.style.left =`${(this.pos[1] +=2) % 95}%`;
+                    },100)
+                    break;
             default :
-                // this.div.style.backgroundColor='yellow';
                 this.div.innerHTML = "<img src ='assets/images/plantes/2.png'>";
                 moveClass = setInterval (()=> {
                     this.div.style.left =`${(this.pos[1] -- === 0)? this.pos[1]= 95 : this.pos[1]  % 95}%`;
@@ -250,7 +227,6 @@ function randomPos () {
     let posLeft = Math.floor(Math.random()* (95-20) +10);
 
     if ((posTop > 30 && posTop < 70) || (posLeft > 30 && posLeft < 70) ) {
-    //    console.log('howcome');
         return randomPos ();
 
     } 
@@ -278,26 +254,22 @@ let keyReleased = function (event) {
 document.addEventListener("keydown", keyPress);
 document.addEventListener("keyup", keyReleased);
 
-
-var fireInterval ;   //for check if fire interval is set or not
-                     // shooting function  
+// var used to check if fire interval is set or not
+var fireInterval ;   
+// shooting function  
 let shoot = function () {
         let fireAngle = angle ;
         let shootFire = new FireShape(fireImageURL,fireAngle);
-
         explosionAudio.play();
         fireAudio.play();
-        
-    
-        
         let firetopposition;
         let fireleftposition;
-                                       //fire position control function                 
+        
+        // fire position control function                 
         let controlFire = function () {
             fireclass = document.querySelectorAll('.fire');
             let len = fireclass.length ;
             for ( let i=0 ;i<len ;i++) {   
-                // console.log(fireclass[i]);
                 firetopposition = parseInt(fireclass[i].style.top) ; 
                 fireleftposition = parseInt(fireclass[i].style.left) ;
             if (fireleftposition >97 || firetopposition >97 || fireleftposition < 3 || firetopposition < 3) {
@@ -628,31 +600,20 @@ let startTheGame = function()
     }, 30);
     setInterval(controlMovement, 40);
 };
-
-
-//=====================================
-
-
-
+//************************************************************************
 // generate rock div and append them to the main game container 
 
 function generateRocks () {
-    
-    if (RocksNumber < rocksMaximum ) { // check the maximum number of rocks 
+    // check the maximum number of rocks depending on level
+    if (RocksNumber < rocksMaximum ) {  
         let num = randomNum (level);
         let randompos1 = randomPos ();  
-
         let newRock = new Rock ( randompos1 , num );
-
         container.appendChild(newRock.div);
-
         moveToLevel(level);
-
         newRock.move();
-
         collisionDetection();
-        
-        RocksNumber ++ ;
+        RocksNumber++ ;
     }
 }
 
@@ -660,22 +621,14 @@ function generateRocks () {
 
 
 function collisionDetection() {
-    var rocksingame = document.getElementsByClassName('rock'); // array for collecting rock nodes 
-    var fireclass = document.querySelectorAll('.fire');  // array for collecting fire nodes            
+    // array for collecting rock nodes 
+    var rocksingame = document.getElementsByClassName('rock'); 
+    // array for collecting fire nodes
+    var fireclass = document.querySelectorAll('.fire');
 
     // variables for rocket,fire,rocks position detection
-    let Rocktop ,
-        Rockleft,
-        Rockheight,
-        Rockwidth,
-        shiptop,
-        shipleft,
-        shipheight,
-        shipwidth,
-        fireTop,
-        fireLeft,
-        fireHeight,
-        fireWidth;
+    let Rocktop ,Rockleft,Rockheight,Rockwidth,shiptop,shipleft,shipheight,
+        shipwidth,fireTop,fireLeft,fireHeight,fireWidth;
 
     let lenRock = rocksingame.length;
     let lenFire = fireclass.length;
@@ -712,15 +665,13 @@ function collisionDetection() {
                 console.log('score added');
                 console.log('totalscore');
                 
-                if(level === 1){
+                if(level === 1)
                     level_Score.style.width = `${score *0.2}%`;
-                }
-                if(level === 2){
+                if(level === 2)
                     level_Score.style.width = `${score *0.2}%`;
-                }
-                if(level === 3){
+                if(level === 3)
                   level_Score.style.width = `${score *0.1}%`;  
-                }
+                
                 if (totalScore === 500 ) {
                     score = 0 ;
                     level = 2;
@@ -750,7 +701,6 @@ function collisionDetection() {
             }
         }
         // ship collision with rocks conditions => reduce lifes
-
         if((Rockleft+Rockwidth) > shipleft && Rockleft < (shipleft+shipwidth) &&
              (Rocktop+Rockheight) > shiptop && Rocktop < (shiptop+shipheight)) {
 			// Do anything you want in the program when collision is detected
@@ -777,19 +727,10 @@ function collisionDetection() {
     window.requestAnimationFrame(collisionDetection);
 }
 
-//====== Main Game Start Function ====
-
+//======================= Main Game Start Function =========================
 var gameStart;  //generating rocks interval 
 function starGame () {
-    startTheGame();                                     //for Rocket ship and fire
-    gameStart = setInterval(generateRocks , 1000);      //for Rocks    
+    startTheGame(); 
+    gameStart = setInterval(generateRocks , 1000); //for Rocks ship and fire
 }
-
 but.addEventListener('click',starGame);  //start game button
-
-
-
-
-
-
-
