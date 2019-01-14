@@ -1,6 +1,5 @@
 # Exploring Ship
 Project Descripting : Powered By => JavaScript <= as a javascript project of ITI OPEN SOURCE WEB APPLICATION DEVELOPMENT 2019 
-
 Description : This game is about exploring the space and protecting the earth from crashing with other planets and Aliens 
 using your spaceship 
 
@@ -21,8 +20,7 @@ Remember The faith of the planet relies on you ^_^
 We wish you having a great time :)
 
 ## Installing The Game
-* Game depends on a web browser like Chrome or firefox but any other browser will be okay (Suggestion : You can install Chrome from this site [Download Chrome](https://www.google.com.sa/intl/ar/chrome/?brand=CHBD&gclid=Cj0KCQiAvebhBRD5ARIsAIQUmnngJzdkbtOOMUmFQ-eN0sQoNh5TBE7XLAdd4w57EqsLfdg9VWSBdY8aApOOEALw_wcB&gclsrc=aw.ds ).
-
+* Game depends on a web browser like Chrome or firefox but any other browser will be okay (Suggestion : You can install Chrome from this site ....).
 * The second Step is just to follow the instructions of the game.
 
 ## Running the game
@@ -52,32 +50,28 @@ We wish you having a great time :)
 
 ### ScreenShots the game
 
-#### Home Page Screen 
-![alt text](https://github.com/Islam-Youssief/space-exploring-game/blob/master/screenshots/1.png)
+###### Home Page Screen 
+![alt text](https://github.com/Mohamed-awad/game_Zaza_js_ITI/blob/master/screens/interface.jpg)
+1
 
-#### Choosing SpaceShip
-![alt text](https://github.com/Islam-Youssief/space-exploring-game/blob/master/screenshots/2.PNG)
+###### Choosing SpaceShip
+2
 
-#### Playing The Game
- ![alt text](https://github.com/Islam-Youssief/space-exploring-game/blob/master/screenshots/3.PNG)
- 
- ![alt text](https://github.com/Islam-Youssief/space-exploring-game/blob/master/screenshots/4.PNG)
- 
- ![alt text](https://github.com/Islam-Youssief/space-exploring-game/blob/master/screenshots/5.PNG)
+###### Playing The Game
+ 3,4,5
+###### Badges Of a player
+6
 
-#### Badges Of a player
-![alt text](https://github.com/Islam-Youssief/space-exploring-game/blob/master/screenshots/6.PNG)
+###### Winning The Game 
+7
 
-#### Winning The Game 
-![alt text](https://github.com/Islam-Youssief/space-exploring-game/blob/master/screenshots/7.PNG)
+###### Showing Scores Of All The Players
+8
 
-#### Showing Scores Of All The Players
-![alt text](https://github.com/Islam-Youssief/space-exploring-game/blob/master/screenshots/8.PNG)
+##### Showing The Badges Of The Top Player
+9
 
-### Showing The Badges Of The Top Player
-![alt text](https://github.com/Islam-Youssief/space-exploring-game/blob/master/screenshots/9.PNG)
+##### Showing The Development Team
+10
 
-### Showing The Development Team
-![alt text](https://github.com/Islam-Youssief/space-exploring-game/blob/master/screenshots/10.PNG)
-
-##### Special Thanks to https://www.freepik.com/ for the images
+##### Special Thanks to freepick.com for the images

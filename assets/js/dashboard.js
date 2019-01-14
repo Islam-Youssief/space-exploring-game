@@ -7,6 +7,7 @@ var num = [];
 var names = [];
 var ls = window.localStorage;
 
+// used to display the name + score in the html page
 function display()
 {
  if (num.length > 0) {
@@ -18,6 +19,7 @@ function display()
  } 
 }
 
+// used to get all players score 
 function getScore()
 {
    if (ls.length === 0) {
@@ -66,7 +68,4 @@ function getScore()
     }
     display();
 }
-
-
-
 getScore();
