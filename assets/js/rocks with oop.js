@@ -1,6 +1,7 @@
 const divchoose = document.getElementById('choose');
 const divgame = document.getElementById('main_game');
 
+
 //================ ship movement = Rocks = fire= main classes===============================
 
 class Rocket {
@@ -45,7 +46,98 @@ class Rock {
         this.div.dataset.rocknum = num;
         this.num = num ;
     } 
- }
+    move () {
+
+        let moveClass;
+        switch (this.num) {
+            case 0 :
+                this.div.innerHTML = "<img src ='assets/images/plantes/2.png'>";
+                moveClass = setInterval (()=> {
+                    this.div.style.left =`${this.pos[1] ++ % 95}%`;
+                    this.div.style.top =`${this.pos[0] ++ % 95}%`;
+                },200)
+            break;
+            case 1 :
+                this.div.innerHTML = "<img src ='assets/images/plantes/1.png'>";
+                moveClass = setInterval (()=> {
+                    this.div.style.left =`${(this.pos[1] -- === 0)? this.pos[1]= 95 : this.pos[1]  % 95}%`;
+                    this.div.style.top =`${(this.pos[0] -- === 0)? this.pos[0]= 95 : this.pos[0]  % 95}%`;
+                },300)
+            break;
+            case 2 :
+                this.div.innerHTML = "<img src ='assets/images/plantes/asteroid_blend.png'>";
+                moveClass = setInterval (()=> {
+                    this.div.style.left =`${this.pos[1] ++ % 95}%`;
+                    this.div.style.top =`${this.pos[0] ++ % 95}%`;
+                },500)
+            break;
+
+            case 3 :
+                this.div.innerHTML = "<img src ='assets/images/plantes/3.png'>";
+                moveClass = setInterval (()=> {
+                    this.div.style.left =`${this.pos[1] ++ % 95}%`;
+                    this.div.style.top =`${(this.pos[0] +=.1) % 95}%`;
+                },200)
+            break;
+            case 4 :
+                this.div.innerHTML = "<img src ='assets/images/plantes/4.png'>";
+                moveClass = setInterval (()=> {
+                    this.div.style.left = `${(this.pos[1] -- === 0)? this.pos[1]= 95 : this.pos[1]  % 95}%`;
+                    this.div.style.top =`${(this.pos[0] +=.2) % 95}%`;
+                },200)
+            break;
+            case 5 :
+                this.div.innerHTML = "<img src ='assets/images/plantes/5.png'>";
+                moveClass = setInterval (()=> {
+                    this.div.style.top =`${this.pos[0] ++ % 95}%`;
+                    this.div.style.left =`${(this.pos[1] +=.2) % 95}%`;
+                },200)
+            break;
+            case 6 :
+                this.div.innerHTML = "<img src ='assets/images/plantes/6.png'>";
+                moveClass = setInterval (()=> {
+                    this.div.style.top =`${(this.pos[0] -- === 0)? this.pos[0]= 95 : this.pos[0]  % 95}%`;
+                    this.div.style.left =`${(this.pos[1] +=.2) % 95}%`;
+                },200)
+            break;
+            case 7 :
+                this.div.innerHTML = "<img src ='assets/images/plantes/7.png'>";
+                moveClass = setInterval (()=> {
+                    this.div.style.top =`${this.pos[0] ++ % 95}%`;
+                    this.div.style.left =`${(this.pos[1] +=.5) % 95}%`;
+                },200)
+            break;
+            case 8 :
+                this.div.innerHTML = "<img src ='assets/images/plantes/8.png'>";
+                moveClass = setInterval (()=> {
+                    this.div.style.top =`${(this.pos[0] +=2) % 95}%`;
+                    this.div.style.left =`${this.pos[1] ++ % 95}%`;
+                },100)
+            break;
+            case 9 :
+                this.div.innerHTML = "<img src ='assets/images/plantes/9.png'>";
+                moveClass = setInterval (()=> {
+                    this.div.style.top =`${(this.pos[0] +=.5) % 95}%`;
+                    this.div.style.left =`${this.pos[1] ++ % 95}%`;
+                },100)
+            break;
+            case 10 :
+                this.div.innerHTML = "<img src ='assets/images/plantes/10.png'>";
+                moveClass = setInterval (()=> {
+                    this.div.style.top =`${this.pos[0] ++ % 95}%`;
+                    this.div.style.left =`${(this.pos[1] +=2) % 95}%`;
+                },100)
+            break;
+            default :
+                this.div.innerHTML = "<img src ='assets/images/plantes/2.png'>";
+                moveClass = setInterval (()=> {
+                    this.div.style.left =`${(this.pos[1] -- === 0)? this.pos[1]= 95 : this.pos[1]  % 95}%`;
+                    this.div.style.top =`${this.pos[0] ++ % 95}%`;
+                },100)
+        }
+    }
+};
+
 //========= Movements and controls======
 
 let keyPressed = [];
@@ -66,249 +158,109 @@ document.addEventListener("keyup", keyReleased);
 
 var fireInterval ;   //for check if fire interval is set or not
                      // shooting function  
-// generate main rocket shape and fire shape 
+let shoot = function () {
+        let fireAngle = angle ;
+        let shootFire = new FireShape(fireImageURL,fireAngle);
 
-let startTheGame = function() 
-{
-    userRocket = new Rocket(rocketimageURL);
-    let controlMovement = function ()
-    {
-        let leftposition = parseInt(userRocket.rocket.style.left) ;
-        let topposition  = parseInt(userRocket.rocket.style.top) ;
-        const RocketWidth = parseInt(userRocket.rocket.style.width) ;
-        const RocketHeight = parseInt(userRocket.rocket.style.height) ;
+        explosionAudio.play();
+        fireAudio.play();
         
-        if (keyPressed["ArrowRight"])
-        {
-            angle = angle +30;
-            userRocket.rocket.style.transform= `rotate(${angle}deg)`;
-            if (angle == 360) 
-                angle = 0;
-        }
-        if (keyPressed["ArrowLeft"]) {
-            angle = angle -30;
-            userRocket.rocket.style.transform= `rotate(${angle}deg)`;
-            if (angle == -360)  
-                angle = 0;
-        }
-        if (keyPressed["ArrowDown"]) {
-            switch(angle)
-            {
-                case -330: 
-                case 30 :
-                    userRocket.rocket.style.left = `${((leftposition -= (2 * 0.5)) < 0)? leftposition= 90 : leftposition %90}%`;
-                    userRocket.rocket.style.top = `${(topposition += (2 * 0.866025) ) % 90}%`;
-                    break;
     
-                case -300:
-                case 60 :
-                    userRocket.rocket.style.left = `${((leftposition -= (2 * 0.5 )) < 0)? leftposition= 90 : leftposition %90}%`;
-                    userRocket.rocket.style.top = `${(topposition += (2 * 0.866025) ) % 90}%`;
-                    break;
-                
-                case -270:
-                case 90:
-                        userRocket.rocket.style.left = `${(leftposition -= 1.5) % 90}%`;
-                    break;
+        
+        let firetopposition;
+        let fireleftposition;
+                                       //fire position control function                 
+        let controlFire = function () {
+            fireclass = document.querySelectorAll('.fire');
+            let len = fireclass.length ;
+            for ( let i=0 ;i<len ;i++) {   
+                // console.log(fireclass[i]);
+                firetopposition = parseInt(fireclass[i].style.top) ; 
+                fireleftposition = parseInt(fireclass[i].style.left) ;
+            if (fireleftposition >97 || firetopposition >97 || fireleftposition < 3 || firetopposition < 3) {
+                container.removeChild (fireclass[i]);
+            } 
 
-                case -240:
-                case 120 :
-                    userRocket.rocket.style.left = `${((leftposition -= (2*0.866025)) < 0)? leftposition= 90 : leftposition %90}%`;
-                    userRocket.rocket.style.top = `${((topposition -= (2*.5)) < 0)? topposition= 85 : topposition %85}%`;
-                    break;
-
-                case-210:
-                case 150 :
-                    userRocket.rocket.style.left = `${((leftposition -= (2*.5)) < 0)? leftposition= 90 : leftposition %90}%`;
-                    userRocket.rocket.style.top = `${((topposition -= (2*0.866025) ) < 0)? topposition= 85 : topposition %85}%`;
-                    break;
+            else {
+                switch(parseInt(fireclass[i].dataset.angle))
+                {
+                    case 30:
+                    case -330: 
+                        fireclass[i].style.top = `${(firetopposition -= (2*0.866025)) }%`;
+                        fireclass[i].style.left= `${(fireleftposition += (2 * .5)) }%`;
+                        break;
+            
+                    case 60:
+                    case -300: //cond 
+                        fireclass[i].style.top = `${(firetopposition -= (2 * .5))}%`;
+                        fireclass[i].style.left= `${(fireleftposition += (2*0.866025) ) }%`;
+                        break;
                     
-                case -180:
-                case 180 :
-                    userRocket.rocket.style.top = `${(topposition -= 1.5) % 90}%`;
-                    break;
-             
-                case -150:
-                case 210 :
-                    userRocket.rocket.style.left = `${(leftposition += (2*.5)) % 90}%`;
-                    userRocket.rocket.style.top = `${((topposition -= (2*0.866025)) < 0)? topposition= 85 : topposition %85}%`; 
-                    break;
+                    case 90:
+                    case -270://cond
+                        fireclass[i].style.left = `${(fireleftposition += 1.5) }%`;
+                        break;
+                    
+                    case 120:
+                    case -240: //cond
+                        fireclass[i].style.top = `${(firetopposition += (2 * .5))}%`;
+                        fireclass[i].style.left= `${(fireleftposition += (2*0.866025)) }%`;
+                        break;
 
-                case -120:
-                case 240 :
-                    userRocket.rocket.style.left = `${(leftposition += (2*0.866025)) % 90}%`;
-                    userRocket.rocket.style.top = `${((topposition -= (2*.5)) < 0)? topposition= 85 : topposition %85}%`;
-                    break;
+                    case 150:
+                    case-210://cond
+                        fireclass[i].style.top = `${(firetopposition += (2.5))}%`;
+                        fireclass[i].style.left= `${(fireleftposition += (2 * .5)) }%`;   
+                        break;
+                    
+                    case 180:
+                    case -180: //conf
+                        fireclass[i].style.top = `${(firetopposition += 1.5)}%`;    
+                        break;
                 
-                case -90:
-                case 270 :
-                        userRocket.rocket.style.left = `${((leftposition += 1.5) < 0)? leftposition= 90 : leftposition %90}%`;
-                    break;
+                    case 210:
+                    case -150://cond
+                        fireclass[i].style.top = `${(firetopposition += 2.5)}%`;
+                        fireclass[i].style.left= `${(fireleftposition -= (2 * .4 )) }%`;
+                        break;
+
+                    case 240://cond
+                    case -120:
+                        fireclass[i].style.top = `${(firetopposition += (2 * .5))}%`;
+                        fireclass[i].style.left= `${(fireleftposition -= (2*0.866025)) }%`;
+                        break;
+                    
+                    case 270:
+                    case -90://cond
+                    fireclass[i].style.left = `${(fireleftposition -= 1.5) }%`;
+                        break;
+                    
+                    case 300:
+                    case -60:
+                        fireclass[i].style.top = `${(firetopposition -= (2 * .5))}%`;
+                        fireclass[i].style.left= `${(fireleftposition -= (2*0.866025)) }%`;
+                        break;
+
+                    case 330:
+                    case -30:
+                        fireclass[i].style.top = `${(firetopposition -= (2*0.866025))}%`;
+                        fireclass[i].style.left= `${(fireleftposition -= (2 * .5)) }%`;
+                        break
                 
-                case -60:
-                case 300 :
-                    userRocket.rocket.style.left = `${(leftposition += (2*0.866025) ) % 90}%`;
-                    userRocket.rocket.style.top = `${(topposition += (2*.5) ) % 90}%`; 
-                    break;    
-                 
-                 case -30:
-                 case 330 :
-                    userRocket.rocket.style.left = `${(leftposition += (2*.5)) % 90}%`;
-                    userRocket.rocket.style.top = `${(topposition += (2*0.866025)) % 90}%`; 
-                    break
-             
-                case 0:
-                case 360 :
-                    userRocket.rocket.style.top = `${((topposition += 1.5) < 0)? topposition= 85 : topposition %85}%`;               
-                    break;
-            }
+                    case 0:
+                    case 360:
+                      fireclass[i].style.top = `${firetopposition -= 1.5}%`;
+                        break;
+                
+                }
+            }} 
+        };
+       if (!fireInterval) {
+        fireInterval = setInterval(controlFire, 50);
         }
-        if (keyPressed["ArrowUp"]) 
-        {
-            switch(angle)
-            {
-                case 30:
-                case -330: 
-                    userRocket.rocket.style.left = `${(leftposition += (3*.5)) % 90}%`;
-                    userRocket.rocket.style.top = `${((topposition -= (3*0.866025)) < 0)? topposition= 85 : topposition %85}%`;    
-                    break;
     
-                case 60:
-                case -300:
-                    userRocket.rocket.style.left = `${(leftposition += (3*0.866025)) % 90}%`;
-                    userRocket.rocket.style.top = `${((topposition -= (3*.5)) < 0)? topposition= 85 : topposition %85}%`;
-                    break;
-                
-                case 90:
-                case -270:
-                    userRocket.rocket.style.left = `${(leftposition += 3) % 90}%`;
-                    break;
-                
-                case 120:
-                case -240:
-                    userRocket.rocket.style.left = `${(leftposition += (3*0.866025)) % 90}%`;
-                    userRocket.rocket.style.top = `${(topposition += (3*.5)) % 85}%`;
-                    break;
-
-                case 150:
-                case-210:
-                    userRocket.rocket.style.left = `${(leftposition += (3*.5)) % 90}%`;
-                    userRocket.rocket.style.top = `${(topposition += (3*0.866025)) % 90}%`;                
-                break;
-                
-                case 180:
-                case -180:
-                    userRocket.rocket.style.top = `${(topposition += 3) % 90}%`;
-                    break;
-             
-                case 210:
-                case -150:
-                    userRocket.rocket.style.left = `${((leftposition -= (3*.5)) < 0)? leftposition= 90 : leftposition %90}%`;
-                    userRocket.rocket.style.top = `${(topposition += (3*0.866025)) % 85}%`;
-                    break;
-
-                case 240:
-                case -120:
-                    userRocket.rocket.style.left = `${((leftposition -= (3*0.866025)) < 0)? leftposition= 90 : leftposition %90}%`;
-                    userRocket.rocket.style.top = `${(topposition += (3*.5)) % 85}%`;
-                    break;
-                
-                case 270:
-                case -90:
-                    userRocket.rocket.style.left = `${((leftposition -= 3) < 0)? leftposition= 90 : leftposition %90}%`;                
-                    break;
-                
-                case 300:
-                case -60:
-                    userRocket.rocket.style.left = `${((leftposition -= (3*0.866025)) < 0)? leftposition= 90 : leftposition %90}%`;
-                    userRocket.rocket.style.top = `${((topposition -= (3*.5)) < 0)? topposition= 85 : topposition %85}%`;
-                    break;
-
-                case 330:
-                case -30:
-                    userRocket.rocket.style.left = `${((leftposition -= (3*.5)) < 0)? leftposition= 90 : leftposition %90}%`;
-                    userRocket.rocket.style.top = `${((topposition -= (3*0.866025)) < 0)? topposition= 85 : topposition %85}%`;
-                    break;
-             
-                case 0:
-                case 360 : 
-                    userRocket.rocket.style.top = `${((topposition -= 3) < 0)? topposition= 85 : topposition %85}%`;
-                    break;            
-            }
-           
-        }
-        switch (angle) { // used to locate the position of the shooting fire
-            case 30:
-            case -330 :
-                posleft = leftposition + (0.4 * RocketHeight);
-                postop  = topposition +( 0.2 * RocketWidth);
-                break;
-            case 60:
-            case -300:
-                posleft = leftposition +(.5 * RocketHeight);
-                postop  = topposition +( 0.4 * RocketWidth);
-                break;
-
-            case 90:
-            case -270:
-                posleft = leftposition +(.5 * RocketHeight);
-                postop  = topposition +( 0.65 * RocketWidth);
-                break;
-            case 120:
-            case -240:
-                posleft = leftposition +(.5 * RocketHeight);
-                postop  = topposition +(.65 * RocketHeight);
-                break;
-            case 150:
-            case-210:
-                posleft = leftposition +(.4 * RocketHeight);
-                postop  = topposition +(.7 * RocketHeight);
-                break;
-            case 180:
-            case -180:
-                posleft = leftposition +( 0.4 * RocketWidth);
-                postop  = topposition +(.8 * RocketHeight);
-                break;
-            case 210:
-            case -150:
-                posleft = leftposition +( 0.3 * RocketWidth);
-                postop  = topposition +(.6 * RocketHeight);
-                break;
-            case 240:
-            case -120:
-               posleft = leftposition +( 0.3 * RocketWidth);
-                postop  = topposition +(.55 * RocketHeight);
-                break;
-            case 270:
-            case -90:
-                posleft = leftposition +( 0.2 * RocketWidth);
-                postop  = topposition +( 0.65 * RocketWidth);
-                break;
-            case 300:
-            case -60:
-                posleft = leftposition +( 0.15 * RocketWidth);
-                postop  = topposition +( 0.4 * RocketWidth);
-                break;
-            case 330:
-            case -30:
-                posleft = leftposition +( 0.2 * RocketWidth);
-                postop  = topposition +( 0.25 * RocketWidth);
-                break;
-            case 0 :
-            case 360 :
-                posleft = leftposition +( 0.4 * RocketWidth);
-                postop  = topposition +( 0.2 * RocketWidth);
-                break;
-        }
-        
-        
-    };
- 
-    setInterval(() => {
-        if (keyPressed["Space"]) shoot();
-    }, 30);
-    setInterval(controlMovement, 40);
 };
+
 
 //====== Main Game Start Function ====
 
