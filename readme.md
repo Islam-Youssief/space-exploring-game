@@ -59,11 +59,11 @@ We wish you having a great time :)
 ![alt text](https://github.com/Islam-Youssief/space-exploring-game/blob/master/screenshots/2.PNG)
 
 #### Playing The Game
- ![alt text](https://github.com/Islam-Youssief/space-exploring-game/blob/master/screenshots/3.PNG)
+![alt text](https://github.com/Islam-Youssief/space-exploring-game/blob/master/screenshots/3.PNG)
  
- ![alt text](https://github.com/Islam-Youssief/space-exploring-game/blob/master/screenshots/4.PNG)
+![alt text](https://github.com/Islam-Youssief/space-exploring-game/blob/master/screenshots/4.PNG)
  
- ![alt text](https://github.com/Islam-Youssief/space-exploring-game/blob/master/screenshots/5.PNG)
+![alt text](https://github.com/Islam-Youssief/space-exploring-game/blob/master/screenshots/5.PNG)
 
 #### Badges Of a player
 ![alt text](https://github.com/Islam-Youssief/space-exploring-game/blob/master/screenshots/6.PNG)
